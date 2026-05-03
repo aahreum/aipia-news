@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import QueryProvider from '@/shared/providers/QueryProvider';
 import './globals.css';
+import Header from '@/shared/ui/Header';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,7 +16,10 @@ export default function RootLayout({
   return (
     <html lang='ko' className='h-full antialiased'>
       <body className='flex min-h-full flex-col'>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <Header />
+          {children}
+        </QueryProvider>
       </body>
     </html>
   );
