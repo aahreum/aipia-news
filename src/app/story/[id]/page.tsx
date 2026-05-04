@@ -1,23 +1,24 @@
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 import ArrowLeftIcon from '@/shared/assets/icons/arrow-left.svg';
 import ExternalLinkIcon from '@/shared/assets/icons/external-link.svg';
-import type { HackerNewsItem } from '@/shared/types/hackerNews';
+import { fetchStory } from '@/shared/lib/api';
 import Button from '@/shared/ui/Button';
 import { formatDate, toISODate } from '@/shared/utils/time';
 
-// TODO: api 연동 시 제거
-const dummyStory: HackerNewsItem = {
-  id: 43900226,
-  title:
-    'Show HN: I built an open-source AI-powered news aggregator in Next.js',
-  by: 'johndoe',
-  time: 1746316800,
-  score: 342,
-  url: 'https://example.com/my-project',
-};
+export default async function DetailStory({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const story = await fetchStory(Number(id));
 
-export default function DetailStory() {
-  const { title, by, time, score, url } = dummyStory;
+  if (!story) {
+    notFound();
+  }
+
+  const { title, by, time, score, url } = story;
 
   return (
     <main className='py-8'>
