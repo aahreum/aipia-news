@@ -1,48 +1,11 @@
 'use client';
 
-import { useRouter, useSearchParams, usePathname } from 'next/navigation';
-import { useRef } from 'react';
 import { cn } from '@/shared/lib/cn';
-
-const TABS = ['Top', 'New', 'Best'] as const;
-type Tab = (typeof TABS)[number];
+import { useTabBar } from '../hooks/useTabBar';
 
 export default function TabBar() {
-  const searchParams = useSearchParams();
-  const activeTab = (searchParams.get('tab') as Tab) ?? 'Top';
-  const router = useRouter();
-  const pathname = usePathname();
-  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
-
-  const handleTabClick = (tab: Tab) => {
-    // TODO: 탭 전환에 따른 뉴스 목록 필터링 연결
-    const params = new URLSearchParams(searchParams.toString());
-    params.set('tab', tab);
-    router.push(`${pathname}?${params.toString()}`);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
-    let nextIndex: number | null = null;
-
-    if (e.key === 'ArrowRight') {
-      nextIndex = (index + 1) % TABS.length;
-    }
-    if (e.key === 'ArrowLeft') {
-      nextIndex = (index - 1 + TABS.length) % TABS.length;
-    }
-    if (e.key === 'Home') {
-      nextIndex = 0;
-    }
-    if (e.key === 'End') {
-      nextIndex = TABS.length - 1;
-    }
-
-    if (nextIndex !== null) {
-      e.preventDefault();
-      handleTabClick(TABS[nextIndex]);
-      tabRefs.current[nextIndex]?.focus();
-    }
-  };
+  const { TABS, activeTab, tabRefs, handleTabClick, handleKeyDown } =
+    useTabBar();
 
   return (
     <div
