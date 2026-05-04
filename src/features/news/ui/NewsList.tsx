@@ -13,9 +13,9 @@ export default function NewsList() {
       <ul
         className='mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3'
         aria-label='뉴스 목록'>
-        {stories.map((item) => (
+        {stories.map((item, index) => (
           <li key={item.id}>
-            <NewsCard item={item} />
+            <NewsCard item={item} preload={index < 3} />
           </li>
         ))}
         {(isPending || isFetchingNextPage) &&

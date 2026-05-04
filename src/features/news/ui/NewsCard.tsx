@@ -5,9 +5,10 @@ import { formatDate, toISODate } from '@/shared/utils/time';
 
 interface NewsCardProps {
   item: HackerNewsItem;
+  preload?: boolean;
 }
 
-export default function NewsCard({ item }: NewsCardProps) {
+export default function NewsCard({ item, preload = false }: NewsCardProps) {
   const { id, title, by, time } = item;
 
   return (
@@ -22,6 +23,7 @@ export default function NewsCard({ item }: NewsCardProps) {
             alt={title}
             fill
             sizes='(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
+            preload={preload}
             className='rounded-lg object-cover'
           />
         </div>
