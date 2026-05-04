@@ -11,18 +11,20 @@ export default function NewsCard({ item }: NewsCardProps) {
   const { id, title, by, time } = item;
 
   return (
-    <article className='w-full rounded-2xl border border-gray-200'>
+    <article className='h-[158px] w-full rounded-2xl border border-gray-200'>
       <Link
         href={`/story/${id}`}
         aria-label={`${title}, 작성자 ${by}, ${formatDate(time)}`}
-        className='flex gap-4 p-6'>
-        <Image
-          src={`https://picsum.photos/seed/${id}/300/200`}
-          alt={title}
-          width={102}
-          height={108}
-          className='shrink-0 rounded-lg bg-gray-200 object-cover'
-        />
+        className='flex h-full gap-4 p-6'>
+        <div className='relative h-full w-[102px] shrink-0'>
+          <Image
+            src={`https://picsum.photos/seed/${id}/300/200`}
+            alt={title}
+            fill
+            sizes='(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
+            className='rounded-lg object-cover'
+          />
+        </div>
         <div className='flex flex-col justify-center gap-2'>
           <h2 className='line-clamp-2 text-base font-bold text-gray-900'>
             {title}
