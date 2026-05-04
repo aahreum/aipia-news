@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='ko' className='h-full antialiased'>
-      <body className='flex min-h-full flex-col px-4'>
+      <body className='flex min-h-full flex-col overflow-x-hidden px-4'>
         <Header />
         <div className='mx-auto w-full max-w-[1200px]'>
           <QueryProvider>{children}</QueryProvider>
