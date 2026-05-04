@@ -18,6 +18,8 @@ export const useStories = (tab: StoryTab) => {
     initialPageParam: 0,
     getNextPageParam: (lastPage, allPages) =>
       lastPage.length < PAGE_SIZE ? undefined : allPages.length,
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
     throwOnError: true,
   });
 };
