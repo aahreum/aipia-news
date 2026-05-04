@@ -24,6 +24,8 @@ export default function NewsCard({ item, preload = false }: NewsCardProps) {
             fill
             sizes='(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
             preload={preload}
+            placeholder='blur'
+            blurDataURL='data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
             className='rounded-lg object-cover'
           />
         </div>

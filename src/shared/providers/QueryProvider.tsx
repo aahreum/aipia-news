@@ -12,7 +12,11 @@ const ReactQueryDevtools =
       )
     : () => null;
 
-const QueryProvider = ({ children }: { children: React.ReactNode }) => {
+export default function QueryProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -32,6 +36,4 @@ const QueryProvider = ({ children }: { children: React.ReactNode }) => {
       </Suspense>
     </QueryClientProvider>
   );
-};
-
-export default QueryProvider;
+}
