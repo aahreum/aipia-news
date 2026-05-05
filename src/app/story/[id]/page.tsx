@@ -28,7 +28,9 @@ export default async function DetailStory({
     notFound();
   }
 
-  const { title, by, time, score, url } = story;
+  const { id: storyId, title, by, time, score, url } = story;
+  const linkUrl = url ?? `https://news.ycombinator.com/item?id=${storyId}`;
+  const linkLabel = url ? '원문 보기' : 'HN에서 보기';
 
   return (
     <main className='py-8'>
@@ -83,20 +85,18 @@ export default async function DetailStory({
           </dl>
         </header>
 
-        {url && (
-          <section aria-label='원문 링크'>
-            <Button
-              as='link'
-              href={url}
-              target='_blank'
-              rel='noopener noreferrer'
-              className='gap-2'>
-              원문 보기
-              <ExternalLinkIcon aria-hidden='true' focusable='false' />
-              <span className='sr-only'>(새 탭에서 열림)</span>
-            </Button>
-          </section>
-        )}
+        <section aria-label='원문 링크'>
+          <Button
+            as='link'
+            href={linkUrl}
+            target='_blank'
+            rel='noopener noreferrer'
+            className='gap-2'>
+            {linkLabel}
+            <ExternalLinkIcon aria-hidden='true' focusable='false' />
+            <span className='sr-only'>(새 탭에서 열림)</span>
+          </Button>
+        </section>
       </article>
     </main>
   );
