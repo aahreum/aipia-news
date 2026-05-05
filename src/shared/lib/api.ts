@@ -30,7 +30,8 @@ export const storiesQueryOptions = (tab: StoryTab) => ({
       pageParam * PAGE_SIZE,
       (pageParam + 1) * PAGE_SIZE,
     );
-    return Promise.all(pageIds.map(fetchStory));
+    const stories = await Promise.all(pageIds.map(fetchStory));
+    return stories.filter((s): s is HackerNewsItem => s !== null);
   },
   initialPageParam: 0,
 });
