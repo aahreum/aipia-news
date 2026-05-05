@@ -6,6 +6,16 @@ import { fetchStory } from '@/shared/lib/api';
 import Button from '@/shared/ui/Button';
 import { formatDate, toISODate } from '@/shared/utils/time';
 
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const story = await fetchStory(Number(id));
+  return { title: story ? `${story.title} | AIPIA News` : 'AIPIA News' };
+}
+
 export default async function DetailStory({
   params,
 }: {
