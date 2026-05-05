@@ -12,7 +12,9 @@ export const fetchStoryIds = async (tab: StoryTab): Promise<number[]> => {
   return res.json();
 };
 
-export const fetchStory = async (id: number): Promise<HackerNewsItem> => {
+export const fetchStory = async (
+  id: number,
+): Promise<HackerNewsItem | null> => {
   const res = await fetch(`${BASE_URL}/item/${id}.json`);
   if (!res.ok) {
     throw new Error(`스토리(${id})를 불러오지 못했습니다`);
