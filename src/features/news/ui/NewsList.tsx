@@ -1,10 +1,10 @@
 'use client';
 
-import { PAGE_SIZE } from '@/shared/constants/pageSize';
 import type { HackerNewsItem } from '@/shared/types/hackerNews';
 import { useNewsVirtualizer } from '../hooks/useNewsVirtualizer';
 import NewsCard from './NewsCard';
 import SkeletonCard from './SkeletonCard';
+import SkeletonGrid from './SkeletonGrid';
 
 type RowGridProps = {
   columns: number;
@@ -57,14 +57,9 @@ export default function NewsList() {
   } = useNewsVirtualizer();
 
   if (isPending) {
-    const skeletonRowCount = Math.ceil(PAGE_SIZE / columns);
     return (
-      <div ref={listRef} className='mt-8 flex flex-col gap-6'>
-        {Array.from({ length: skeletonRowCount }).map((_, i) => (
-          <RowGrid key={i} columns={columns}>
-            <SkeletonRow columns={columns} />
-          </RowGrid>
-        ))}
+      <div ref={listRef}>
+        <SkeletonGrid />
       </div>
     );
   }
