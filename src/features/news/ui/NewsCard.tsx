@@ -22,7 +22,7 @@ export default function NewsCard({ item, preload = false }: NewsCardProps) {
             src={`https://picsum.photos/seed/${id}/300/200`}
             alt={title}
             fill
-            sizes='(min-width: 768px) 33vw, (min-width: 640px) 50vw, 100vw'
+            sizes='102px'
             preload={preload}
             placeholder='blur'
             blurDataURL='data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw=='
