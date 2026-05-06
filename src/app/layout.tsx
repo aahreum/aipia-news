@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import QueryProvider from '@/shared/providers/QueryProvider';
 import './globals.css';
 import Header from '@/shared/ui/Header';
+import ScrollTopButton from '@/shared/ui/ScrollTopButton';
 
 export const metadata: Metadata = {
   title: 'AIPIA News',
@@ -20,6 +21,7 @@ export default function RootLayout({
         <div className='mx-auto w-full max-w-[1200px]'>
           <QueryProvider>{children}</QueryProvider>
         </div>
+        <ScrollTopButton />
       </body>
     </html>
   );
