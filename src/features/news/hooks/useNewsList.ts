@@ -13,7 +13,7 @@ export const useNewsList = () => {
     useStories(tab);
 
   return {
-    stories: data?.pages.flat() ?? [],
+    stories: data?.pages.flatMap((p) => p.stories) ?? [],
     isPending,
     isFetchingNextPage,
     fetchNextPage,
