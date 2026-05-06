@@ -1,3 +1,4 @@
+import { cache } from 'react';
 import { PAGE_SIZE } from '@/shared/constants/pageSize';
 import { QUERY_KEYS } from '@/shared/constants/queryKey';
 import { HackerNewsItem, StoryTab } from '@/shared/types/hackerNews';
@@ -33,15 +34,16 @@ const getCachedStoryIds = (tab: StoryTab): Promise<number[]> => {
   return promise;
 };
 
-export const fetchStory = async (
-  id: number,
-): Promise<HackerNewsItem | null> => {
-  const res = await fetch(`${BASE_URL}/item/${id}.json`);
-  if (!res.ok) {
-    throw new Error(`스토리(${id})를 불러오지 못했습니다`);
-  }
-  return res.json();
-};
+// React.cache: 동일 서버 렌더 내 generateMetadata + 컴포넌트 양쪽 호출 시 1회만 실행
+export const fetchStory = cache(
+  async (id: number): Promise<HackerNewsItem | null> => {
+    const res = await fetch(`${BASE_URL}/item/${id}.json`);
+    if (!res.ok) {
+      throw new Error(`스토리(${id})를 불러오지 못했습니다`);
+    }
+    return res.json();
+  },
+);
 
 export const storiesQueryOptions = (tab: StoryTab) => ({
   queryKey: [QUERY_KEYS.stories, tab],
