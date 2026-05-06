@@ -35,7 +35,7 @@ export default async function DetailStory({
   const linkLabel = url ? '원문 보기' : 'HN에서 보기';
 
   return (
-    <main className='py-8'>
+    <div className='py-8'>
       <nav aria-label='페이지 탐색' className='mb-8'>
         <BackToList tab={tab} />
       </nav>
@@ -95,6 +95,6 @@ export default async function DetailStory({
           </Button>
         </section>
       </article>
-    </main>
+    </div>
   );
 }

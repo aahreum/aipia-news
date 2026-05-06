@@ -2,7 +2,7 @@ import SkeletonBox from '@/shared/ui/SkeletonBox';
 
 export default function DetailStoryLoading() {
   return (
-    <main className='py-8'>
+    <div className='py-8'>
       <nav aria-label='페이지 탐색' className='mb-8'>
         <SkeletonBox className='h-5 w-32' />
       </nav>
@@ -43,6 +43,6 @@ export default function DetailStoryLoading() {
           <SkeletonBox className='h-10 w-30 rounded-lg' />
         </section>
       </article>
-    </main>
+    </div>
   );
 }

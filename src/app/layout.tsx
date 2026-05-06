@@ -18,9 +18,9 @@ export default function RootLayout({
     <html lang='ko' className='h-full antialiased'>
       <body className='flex min-h-full flex-col overflow-x-hidden px-4'>
         <Header />
-        <div className='mx-auto w-full max-w-[1200px]'>
+        <main className='mx-auto w-full max-w-[1200px]'>
           <QueryProvider>{children}</QueryProvider>
-        </div>
+        </main>
         <ScrollTopButton />
       </body>
     </html>
