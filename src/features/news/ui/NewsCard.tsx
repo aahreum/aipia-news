@@ -1,5 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { QUERY_KEYS } from '@/shared/constants/queryKey';
 import type { HackerNewsItem } from '@/shared/types/hackerNews';
 import { formatDate, toISODate } from '@/shared/utils/time';
 
@@ -10,11 +14,19 @@ interface NewsCardProps {
 
 export default function NewsCard({ item, preload = false }: NewsCardProps) {
   const { id, title, by, time } = item;
+  const searchParams = useSearchParams();
+  const tab = searchParams.get('tab') ?? QUERY_KEYS.top;
+
+  const handleClick = () => {
+    sessionStorage.setItem('scrollY', String(window.scrollY));
+    sessionStorage.setItem('scrollTab', tab);
+  };
 
   return (
     <article className='h-[158px] w-full rounded-2xl border border-gray-200'>
       <Link
         href={`/story/${id}`}
+        onClick={handleClick}
         aria-label={`${title}, 작성자 ${by}, ${formatDate(time)}`}
         className='flex h-full gap-4 p-6'>
         <div className='relative h-full w-[102px] shrink-0'>
