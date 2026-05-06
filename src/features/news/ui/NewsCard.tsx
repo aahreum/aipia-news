@@ -22,6 +22,7 @@ export default function NewsCard({ item, preload = false }: NewsCardProps) {
             src={`https://picsum.photos/seed/${id}/300/200`}
             alt={title}
             fill
+            quality={60}
             sizes='102px'
             preload={preload}
             placeholder='blur'
