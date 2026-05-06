@@ -1,8 +1,5 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
-import { QUERY_KEYS } from '@/shared/constants/queryKey';
 import type { HackerNewsItem } from '@/shared/types/hackerNews';
 import { useNewsVirtualizer } from '../hooks/useNewsVirtualizer';
 import NewsCard from './NewsCard';
@@ -48,9 +45,6 @@ function SkeletonRow({ columns }: SkeletonRowProps) {
 }
 
 export default function NewsList() {
-  const searchParams = useSearchParams();
-  const tab = searchParams.get('tab') ?? QUERY_KEYS.top;
-
   const {
     listRef,
     virtualizer,
@@ -61,20 +55,6 @@ export default function NewsList() {
     stories,
     isPending,
   } = useNewsVirtualizer();
-
-  useEffect(() => {
-    if (isPending) {
-      return;
-    }
-    const savedY = sessionStorage.getItem('scrollY');
-    const savedTab = sessionStorage.getItem('scrollTab');
-    if (!savedY || savedTab !== tab) {
-      return;
-    }
-    sessionStorage.removeItem('scrollY');
-    sessionStorage.removeItem('scrollTab');
-    requestAnimationFrame(() => window.scrollTo(0, Number(savedY)));
-  }, [isPending, tab]);
 
   if (isPending) {
     return (

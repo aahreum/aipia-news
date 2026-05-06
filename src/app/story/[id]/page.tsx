@@ -1,6 +1,5 @@
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import ArrowLeftIcon from '@/shared/assets/icons/arrow-left.svg';
+import BackToList from '@/features/news/ui/BackToList';
 import ExternalLinkIcon from '@/shared/assets/icons/external-link.svg';
 import { fetchStory } from '@/shared/lib/api';
 import Button from '@/shared/ui/Button';
@@ -18,10 +17,13 @@ export async function generateMetadata({
 
 export default async function DetailStory({
   params,
+  searchParams,
 }: {
   params: Promise<{ id: string }>;
+  searchParams: Promise<{ tab?: string }>;
 }) {
   const { id } = await params;
+  const { tab } = await searchParams;
   const story = await fetchStory(Number(id));
 
   if (!story) {
@@ -35,12 +37,7 @@ export default async function DetailStory({
   return (
     <main className='py-8'>
       <nav aria-label='페이지 탐색' className='mb-8'>
-        <Link
-          href='/'
-          className='inline-flex items-center gap-1.5 text-sm text-gray-500 transition-colors hover:text-primary'>
-          <ArrowLeftIcon aria-hidden='true' focusable='false' />
-          목록으로 돌아가기
-        </Link>
+        <BackToList tab={tab} />
       </nav>
 
       <article aria-labelledby='story-title'>

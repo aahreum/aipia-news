@@ -18,14 +18,13 @@ export default function NewsCard({ item, preload = false }: NewsCardProps) {
   const tab = searchParams.get('tab') ?? QUERY_KEYS.top;
 
   const handleClick = () => {
-    sessionStorage.setItem('scrollY', String(window.scrollY));
-    sessionStorage.setItem('scrollTab', tab);
+    sessionStorage.setItem('fromList', '1');
   };
 
   return (
     <article className='h-[158px] w-full rounded-2xl border border-gray-200'>
       <Link
-        href={`/story/${id}`}
+        href={`/story/${id}?tab=${tab}`}
         onClick={handleClick}
         aria-label={`${title}, 작성자 ${by}, ${formatDate(time)}`}
         className='flex h-full gap-4 p-6'>
