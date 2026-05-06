@@ -1,5 +1,7 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
+import { QUERY_KEYS } from '@/shared/constants/queryKey';
 import type { HackerNewsItem } from '@/shared/types/hackerNews';
 import { useNewsVirtualizer } from '../hooks/useNewsVirtualizer';
 import NewsCard from './NewsCard';
@@ -45,6 +47,9 @@ function SkeletonRow({ columns }: SkeletonRowProps) {
 }
 
 export default function NewsList() {
+  const searchParams = useSearchParams();
+  const tabId = (searchParams.get('tab') ?? QUERY_KEYS.top).toLowerCase();
+
   const {
     listRef,
     virtualizer,
@@ -58,14 +63,23 @@ export default function NewsList() {
 
   if (isPending) {
     return (
-      <div ref={listRef}>
+      <div
+        ref={listRef}
+        role='tabpanel'
+        id={`tabpanel-${tabId}`}
+        aria-labelledby={`tab-${tabId}`}>
         <SkeletonGrid />
       </div>
     );
   }
 
   return (
-    <div ref={listRef} className='mt-8'>
+    <div
+      ref={listRef}
+      role='tabpanel'
+      id={`tabpanel-${tabId}`}
+      aria-labelledby={`tab-${tabId}`}
+      className='mt-8'>
       <div
         role='list'
         aria-label='뉴스 목록'
